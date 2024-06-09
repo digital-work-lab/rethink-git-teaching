@@ -1,11 +1,4 @@
 - links:
-  - name: About
-    link: /about/
-- links:
-  - name: Docs
-    link: /
-    new_window: true
-- links:
   - name: YouTube
     link: https://youtube.com/cloudcannon/
     social_icon: YouTube
