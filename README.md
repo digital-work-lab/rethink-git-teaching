@@ -35,16 +35,6 @@ Hydra is already optimised for adding, updating and removing pages, staff, advic
 * Documentation pages are organised in the navigation by category, with URLs based on the path inside the `_docs` folder.
 * Change the defaults when new posts are created in `_posts/_defaults.md`.
 
-### Contact Form
-
-* Preconfigured to work with CloudCannon, but easily changed to another provider (e.g. [FormSpree](https://formspree.io/)).
-* Sends email to the address listed in company details.
-
-### Staff
-
-* Reused around the site to save multiple editing locations.
-* Add `excluded_in_search: true` to any documentation page's front matter to exclude that page in the search results.
-
 ### Navigation
 
 * Exposed as a data file to give clients better access.
