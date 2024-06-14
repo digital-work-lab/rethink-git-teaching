@@ -60,6 +60,10 @@ defaults:
     values:
       layout: "default"
   - scope:
+      path: "material/notes_reorder.html"
+    values:
+      layout: "default"
+  - scope:
       path: "contact.html"
     values:
       full_width: true
