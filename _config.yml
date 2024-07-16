@@ -3,22 +3,7 @@
 
 title: Rethink Git teaching
 url: "https://proud-alligator.cloudvent.net"
-baseurl:
-google_analytics_key:
-google_maps_javascript_api_key:
-disqus_shortname:
-
-# Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
-# logo: /images/logo.svg
-description: Product marketing template for Jekyll.
-author:
-  name:
-  email:
-  twitter: # twitter username without the @ symbol
-social:
-  name: Hydra Template
-  links:
-    - https://github.com/CloudCannon/hydra-jekyll-template
+baseurl: "https://digital-work-lab.github.io/rethink-git-teaching/"
 
 # -----
 # Build
