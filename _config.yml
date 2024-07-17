@@ -49,6 +49,14 @@ defaults:
     values:
       layout: "default"
   - scope:
+      path: "notes_conceptual_interactive.html"
+    values:
+      layout: "default"
+  - scope:
+      path: "notes_transfer.html"
+    values:
+      layout: "default"
+  - scope:
       path: "contact.html"
     values:
       full_width: true
