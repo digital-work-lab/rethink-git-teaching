@@ -17,31 +17,48 @@ layout: default
 			<div class="text editable">
 				<h2>1. Reorder areas</h2>
                 <p>We suggest to rearrange the order in which the Git areas are introduced, starting with branching, and proceeding with committing and collaborating. In the following, we summarize the key contents that should be covered in each area, as well as best practices to create self-contained learning environments.</p>
-                <h3>Area: Branching</h3>
+                <p><strong>Teaching notes for branching</strong></p>
                 <ul>
-                    <li>Commits, branch pointers, Git graph, merges</li>
+                    <li>Start with commits, explaining that they contain a snapshot of the whole project directory, illustrate commit-shas, meta-data (commit message, author/committer, date), and the Git object store</li>
+                    <li>Continue with predecessor links (no predecessor, one, many), developing the first version of a Git graph</li>
+                    <li>Introduce Git commands: git commit</li>
+                    <li>Explain the concept of HEAD and branch pointers</li>
+                    <li>Introduce Git commands: git branch, git switch, git merge</li>
+                    <li>Explain how rewriting history changes commit-shas and all following commits</li>
                 </ul>
+                <p>Note: Different options may be possible, e.g., git branch/git switch/git checkout -b (plumbing and porcelain)</p>
                 <p>Suggestions for self-contained practice environments</p>
                 <ul>
                     <li><a href="https://learngitbranching.js.org/?locale=de_DE">learngitbranching.js.org</a></li>
+                    <li>TBD: small games?</li>
+                    <li>On-paper exercises to construct a Git graph from commands vice versa</li>
                 </ul>
 
-                <h3>Area: Committing</h3>
+                <p><strong>Teaching notes for committing</strong></p>
                 <ul>
-                    <li>...</li>
+                    <li>Illustrate the three areas: working directory, staging area, and git repository</li>
+                    <li>Highlight why it is useful to have these three areas, and the staging area, in particular</li>
+                    <li>Introduce operations to move file changes across areas (git add, git commit, git restore, git reset)</li>
+                    <li>Clarify the possibility that a file is (changed) in multiple areas simultaneously (partial add)</li>
+                    <li>TBD: git add rm / gitignore</li>
                 </ul>
+                <p>Note: Different terms are used for staging area (index) etc.</p>
                 <p>Suggestions for self-contained practice environments</p>
                 <ul>
-                    <li>...</li>
+                    <li>TODO : link to exercise</li>
+                    <li>TODO : short example (exam)</li>
                 </ul>
-                <h3>Area: Collaborating</h3>
+                <p><strong>Teaching notes for collaborating</strong></p>
                 <ul>
-                    <li>...</li>
+                    <li>Introduce local and remote repositories (upstream, origin, fork with/out permissions to write)</li>
+                    <li>Explain push/pull/fetch and tracking of branches</li>
+                    <li>Illustrate the role of pull requests (technically and why they are useful in practice)</li>
                 </ul>
                 <p>Suggestions for self-contained practice environments</p>
                 <ul>
                     <li>GitHub online (simplified, without a staging area)</li>
                 </ul>
+                <h2>TODO : link to text-books/online resources as an inspiration?</h2>
             </div>
 		</div>
 	</section>
