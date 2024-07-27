@@ -48,7 +48,10 @@ jobs:
       - name: Copy output to _site/output
         run: |
           mkdir -p _site/output/
-          cp -r output/* _site/output/
+          cp slides.html _site/
+          cp slides.pptx _site/
+          cp slides.pdf  _site/
+        # cp -r output/* _site/output/
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v1
