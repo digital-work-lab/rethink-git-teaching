@@ -52,7 +52,7 @@ In the practice sessions:
 
 - Form groups of two to three students
 - Work through the exercises
-- Create a **cheat sheet** summarizing the key commands
+- Create a *cheat sheet* summarizing the key commands
 
 ![bg right:45% width:620px](assets/reorder.png)
 
@@ -108,7 +108,21 @@ blockquote {
 - Commits are created by the **git commit** command
 
 <!--
-Note: demonstrate on the whiteboard
+
+    Demo:
+    - setup a git repository, create a file (explain the working directory), add the changes (explain the staging area), create a commit
+    - inspect the commit (the internal git objects / history):
+    git log
+    - commit ID (sha)
+    - HEAD points to the main branch. (aha)
+    git cat-file -p ENTER_COMMIT
+    - go through the information (if any of that information changes, the fingerprint of the commit changes)
+    - you see that git handles all objects (files, trees, commits) by their fingerprint.
+    git cat-file -p (TREE)
+    git cat-file -p (FILE)
+
+    - if git handles everything through fingerprints, it checks whether the file or tree is already in the database.
+
 -->
 
 ![bg right:45% width:230px center](assets/git-commit.png)
@@ -148,6 +162,7 @@ blockquote {
 - With the **git branch \<branch-name\>** command, a separate line of commits can be started, i.e., one where different lines of commits are developed from the same parent. The branch pointer typically points at the latest commit in the line.
 - With the **git switch \<branch-name\>** command, we can select the branch on which we want to work. Switch effectively moves the HEAD pointer, which points to a particular branch and indicates where new commits are be added.
 - With the **git merge \<other-branch\>** command, separate lines of commits can be brought together, i.e., creating a commit with two parents. The *merge commit* integrates the contents from the *\<other-branch\>* into the branch that is currently selected. The *\<other-branch\>* is not changed. 
+- Per default, Git sets up a branch named "main".
 
 <!-- - Development typically focuses on the **main branch**, which often contains the latest stable version of the project -->
 
@@ -182,35 +197,6 @@ Complete the first two levels on branching, merging, and navigating in the git t
 -> for the challenge: use branch-names only (don't checkout individual commits into main)
 
 ESC to skip explanation
-
--->
-
----
-
-To continue practicing, create the following tree, which resembles a typical setup of git branches.
-
-![width:400px center](assets/git-branches.png)
-
-<!-- 
-git commit
-git commit
-git checkout c1
-git checkout-b hotfix
-git commit
-git checkout main
-git merge hotfix
-git checkout c1
-git checkout -b dev
-git commit
-git commit
-git checkout c6
-git checkout -b feature
-git commit
-git commit
-git checkout dev
-git merge feature
-git checkout main
-git merge dev
 
 -->
 
@@ -278,6 +264,8 @@ Git allows us to stage (select) specific file contents for the next commit.
 - With **git add \<file-name\>**, contents of an *untracked or modified* file are copied to the `.git` repository and added to the staging area, i.e., explicitly marked for inclusion in the next commit.
 - With **git commit**, *staged* files contents are included in a *commit*.
 
+The **git init** command creates the `.git` directory.
+
 ![bg right:38% width:500px](assets/git-areas-1.png)
 
 
@@ -299,7 +287,7 @@ Hogbin-Westby:
 Files in the working directory can reside in three states:
 
 - New files are initially **untracked**, i.e., Git does not include new files in commits without explicit instruction.
-- With *git add*, file contents are **staged** and the file is **tracked**. Given that the file in the working directory is identical with the staged file contents, the file is **unmodified**.
+- With *git add*, file contents are staged and the file is tracked. Given that the file in the working directory is identical with the staged file contents, the file is **unmodified**.
 - When users change a file, it becomes **modified**, i.e., the file in the working directory differs from the file contents in the staging area.
 - With *git add*, the file contents are staged again, and the file becomes **unmodified**.
 - With *git rm*, files are no longer tracked.
@@ -321,55 +309,23 @@ Hogbin-Westby:
 
 ---
 
-# Undoing changes
+# Resetting changes
 
+To undo changes that are not yet committed, it is important to understand whether they are staged or unstaged:
 
----
+- If changes are not yet staged, the file is currently *modified*. A **git restore \<file-name\>** replaces the file in the working directory with the staged version. As a result, the file is *unmodified* because it corresponds to the staged file.
+- If the file is currently *unmodified*, a **git restore --staged \<file-name\>**, Git discards the staged changes by using the last committed version. The file contents in the working directory do not change, but the file becomes *modified* because it differs from the staged version.
 
-# Git status
-
-add screenshot?
-
-TODO : diff and contents
-
-- For convenience, Git displays the diff of file contents.
-
----
+![bg right:38% width:500px](assets/git-reset.png)
 
 <!-- 
-TBD/do not cover?
+TODO : better explain this with a git graph displayed like here:
 
-    Demo:
-    - setup a git repository, create a file (explain the working directory), add the changes (explain the staging area), create a commit
-    - inspect the commit (the internal git objects / history):
-    git log
-    - commit ID (sha)
-    - HEAD points to the main branch. (aha)
-    git cat-file -p ENTER_COMMIT
-    - go through the information (if any of that information changes, the fingerprint of the commit changes)
-    - you see that git handles all objects (files, trees, commits) by their fingerprint.
-    git cat-file -p (TREE)
-    git cat-file -p (FILE)
+https://stackoverflow.com/questions/3528245/whats-the-difference-between-git-reset-mixed-soft-and-hard
 
-    - if git handles everything through fingerprints, it checks whether the file or tree is already in the database.
+# Undoing committed changes
 
----
--->
-
-
----
-
-When writing code, we can make mistakes, or we may need to undo or modify previous changes. To undo changes, it is important to understand whether they are unstaged, staged, or committed.
-
-To **undo unstaged or staged changes**, `git status` suggests the corresponding operations (`git restore <file>` and `git restore --staged <file>`). To see how `git restore` works:
-
-- Modify the `README.md` file and add the changes to the staging area
-- Undo the staged changes
-- Undo the unstaged changes
-
-**Check**: The working directory should be clean again.
-
----
+Clean working directory required!
 
 To **undo committed changes**, there several options (some are available in gitk):
 
@@ -381,56 +337,7 @@ If you have the time, try the different undo operations in the session.
 
 (*) Important: only amend commits that are not yet shared with the team. Otherwise, revert is preferred.
 
-<!-- 
-HEAD~
-shorthand for
-HEAD~1
-
-TODO : how to test/demonstrate undoing an error?
--> This would be important to practice!!!
-
 -->
-
----
-
-# Transfer challenges I 
-
-1. Consider how the **git switch** (or the revert/pull/checkout) command affects the git areas. How does it affect the working directory?
-
-<!--
-Do you see any challenges?
-- Try to reproduce the situation
-(stash) -->
-
-2. Git provides the option to edit prior commits using an interactive rebase, such as the **git rebase -i**. How would that affect the following commits?
-
-<!-- 
-git questions: understand linearized git history displayed on github / reading gitk DAG
-
-Illustrate on the whiteboard : new/alternative commit with the same parent, all following commits are applied on top of the new commit
-- commit shas change!
-- Refer to the slide on commits
-- Maybe even illustrate 
--->
-
----
-
-# Illustration: Git Merge
-
-Setting: Two authors working on the same document ([paper.md](paper.md)).
-
-1. Setup the code skeleton
-2. Write different parts of the same document
-
-  - git checkout -b author_1 (add introduction)
-  - git switch main & git checkout -b author_2 (add background)
-  - git switch main & git merge author_1 (fast forward)
-  - git merge author_2 (merge commit, no conflict)
-
-3. Edit the same part (remember to merge both branches with main)
-
-  - case 1: conflicting contents that contradict each other
-  - case 2: conflicting contents that need to be resolved
 
 ---
 
@@ -440,28 +347,40 @@ Setting: Two authors working on the same document ([paper.md](paper.md)).
 
 ---
 
-TODO: 
+# Collaborating
 
-![bg right:35% width:300px](assets/git_distributed.png)
-
-
----
-
-# Remote collaboration
- 
-- To collaborate, a remote repository is needed (named origin)
+- The distributed model of Git means that every repository has a full version history, (almost) all operations can be completed locally, and every repository can be developed autonomously.
+- To collaborate, a *remote* repository is needed, initially named "origin"
 - If the remote repository exists, the **git clone** command retrieves a local copy
-- If the remote repository does not exist, you have to add the remote origin and push the repository
-- To retrieve changes, use the **git pull** command
-- To share changes, use the **git push** command
+- To create a remote repository (named "origin"), and push a specific branch:
 
-This model works if you are a maintainer of the remote/origin, i.e., if you have write access.
+```
+git remote add origin REMOTE-URL
+git push origin main
+```
+
+<!-- - If the remote repository does not exist, you have to add the remote origin and push the repository -->
 
 ![bg right:30% width:300px](assets/git-remote.png)
 
 ---
 
-# Forks
+# Collaborating on branches
+
+- To retrieve changes, use the **git pull** command
+- To share changes, use the **git push** command
+
+- Most remote operations, including pull, push, pull requests refer to branches
+- In some cases, **branches must be selected explicitly**, and in other cases, git automatically selects branches, i.e., it remembers the typical branch to pull or push
+
+
+![bg right:40% width:300px](assets/git-remote-branch.png)
+
+---
+
+# Collaborating with forks
+
+This model works if you are a maintainer of the remote/origin, i.e., if you have write access.
 
 - In Open-Source projects, write-access is restricted to a few maintainers
 - At the same time, it should be possible to integrate contributions from the community
@@ -470,30 +389,11 @@ This model works if you are a maintainer of the remote/origin, i.e., if you have
 - Contributors can open a **pull request** to signal to maintainers that code from the fork can be merged
 - Pull requests are used for code review, and improvements before code is accepted or rejected
 
-![bg right:40% width:450px](assets/git-remote-fork.png)
-
----
-
-# Fork, invite, clone, and pull-request on GitHub
-
-![bg center width:600px](assets/fork-invite-clone-pull.png)
-
----
-
-# Work in a forked repository
-
-![bg right:50% width:500px](assets/fork-sync.png)
+<!-- 
 
 - In the fork, it is recommended to create working branches instead of committing to the `main` branch.
 - It is good practice to regularly **sync** the `main` branches (on GitHub), and merge the changes into your working branches (locally or on GitHub).
 - Syncing changes may be necessary to get bugfixes from the original repository, and to prevent diverging histories (potential merge conflicts in the pull request).
+-->
 
----
-
-# Remotes and branches
-
-- Most remote operations, including pull, push, pull requests refer to branches
-- In some cases, **branches must be selected explicitly**: pull requests, or pulling new branches
-- In other cases, git automatically selects branches, i.e., it remembers the typical branch to pull or push
-
-![bg right:45% width:500px](assets/git-remote-branch.png)
+![bg right:40% width:450px](assets/git-remote-fork.png)

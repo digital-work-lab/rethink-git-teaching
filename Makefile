@@ -24,5 +24,5 @@ slides.pptx: slides.md assets/theme.css
 	docker run --rm --init -v "$(PWD)":/home/marp/app/ -e LANG=${LANG} -e MARP_USER="${UID}:${GID}" marpteam/marp-cli $< --theme-set assets/theme.css --pptx --allow-local-files -o $@
 
 # Define a pattern rule for building pdf
-output/slides.pdf: slides.md assets/theme.css
+slides.pdf: slides.md assets/theme.css
 	docker run --rm --init -v "$(PWD)":/home/marp/app/ -e LANG=${LANG} -e MARP_USER="${UID}:${GID}" marpteam/marp-cli $< --theme-set assets/theme.css --pdf --allow-local-files -o $@
